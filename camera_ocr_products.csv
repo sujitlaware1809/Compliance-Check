@@ -1,0 +1,5 @@
+product_name,net_weight,mrp,inclusive_of_all_taxes,mfg_date,country_of_origin,manufacturer,compliance_status
+Spicy Masala Chips,5.00 kg,250.0,True,09/2025,INDIA,"Delicious Foods Private Limited  123 industrid Area, Phase |i  Uptartsah - 201301",✅ COMPLIANT
+,,,False,,,,"❌ NON-COMPLIANT: Missing Product Name, Net Quantity, MRP, Inclusive of All Taxes, Manufacture Date, Country of Origin, Manufacturer Details"
+Spicy Masala Chips,5.00 kg,250.0,True,09/2025,INDIA,"Delicious Foods Private Limited  123 industrid Area, Phase |i  Uptartsah - 201301",✅ COMPLIANT
+Potato Chips,100g,250.00,True,09/2025,INDIA,"Delicious Foods Private Limited  123 Industrid Area, Phase I!  polis, Unteeae COieod a lesaits. Ne tss706r1se  For Consumer Complaints and Fedback, please contact:",✅ COMPLIANT
