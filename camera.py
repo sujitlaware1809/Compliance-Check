@@ -4,9 +4,12 @@ from PIL import Image
 import pytesseract
 import re
 import os
+import platform
 
-# If needed, set Tesseract path (Windows example)
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\\tesseract.exe"
+# Set Tesseract path based on environment
+if platform.system() == "Windows" and os.path.exists(r"C:\Program Files\Tesseract-OCR\tesseract.exe"):
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# For Linux/Streamlit Cloud, tesseract should be in PATH after installing via packages.txt
 
 CSV_FILE = "camera_ocr_products.csv"
 if not os.path.exists(CSV_FILE):
