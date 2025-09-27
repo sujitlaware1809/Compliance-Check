@@ -1,15 +1,42 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-import pytesseract
-import re
 import os
 import platform
+import subprocess
+import sys
+
+# Try importing pytesseract with error handling
+try:
+    import pytesseract
+    st.success("✅ pytesseract imported successfully")
+except ImportError as e:
+    st.error(f"❌ Failed to import pytesseract: {e}")
+    st.info("Attempting to install pytesseract...")
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "pytesseract"])
+        import pytesseract
+        st.success("✅ pytesseract installed and imported successfully")
+    except Exception as install_error:
+        st.error(f"❌ Failed to install pytesseract: {install_error}")
+        st.stop()
+
+import re
 
 # Set Tesseract path based on environment
 if platform.system() == "Windows" and os.path.exists(r"C:\Program Files\Tesseract-OCR\tesseract.exe"):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-# For Linux/Streamlit Cloud, tesseract should be in PATH after installing via packages.txt
+    st.info("🖥️ Running on Windows - Tesseract path set")
+else:
+    # For Linux/Streamlit Cloud, check if tesseract is available
+    try:
+        result = subprocess.run(['which', 'tesseract'], capture_output=True, text=True)
+        if result.returncode == 0:
+            st.info(f"🐧 Running on Linux - Tesseract found at: {result.stdout.strip()}")
+        else:
+            st.warning("⚠️ Tesseract not found in PATH")
+    except Exception as e:
+        st.warning(f"⚠️ Could not check tesseract availability: {e}")
 
 CSV_FILE = "camera_ocr_products.csv"
 if not os.path.exists(CSV_FILE):
